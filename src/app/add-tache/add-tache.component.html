@@ -1,0 +1,101 @@
+<!-- Page content -->
+<div class="container mt--8 pb-5">
+    <!-- Table -->
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card bg-secondary shadow border-0">
+                <div class="card-body px-lg-5 py-lg-5">
+                    <div class="text-center text-muted mb-4">
+                        <h4>Formulaire d'ajout d'une tâche</h4>
+                    </div>
+                    <form [formGroup]="tacheForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-plus"></i></span>
+                                </div>
+                                <input type="text" id="intitule" placeholder="Intitulé de la tâche"
+                                    [(ngModel)]="tache.intitule" formControlName="intitule"
+                                    [ngClass]="{'is-invalid': submitted && f.intitule.errors}">
+                            </div>
+                            <div *ngIf="submitted && f.intitule.errors">
+                                <div class="erreur" *ngIf="f.intitule.errors.required">Entrer un intitulé</div>
+                            </div>
+
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-calendar-alt"></i>Planification de
+                                        la
+                                        tâche</span>
+                                </div>
+                                <dl-date-time-picker startView="day" maxView="year" minView="minute" minuteStep="5"
+                                    [(ngModel)]="tache.date" formControlName="date"
+                                    [ngClass]="{'is-invalid': submitted && f.date.errors}">
+                                </dl-date-time-picker>
+                            </div>
+                            <div *ngIf="submitted && f.date.errors">
+                                <div class="erreur" *ngIf="f.date.errors.required">Entrer une date</div>
+                            </div>
+
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                </div>
+                                <input type="text" id="duree" placeholder="Durée de la tâche" [(ngModel)]="tache.duree"
+                                    formControlName="duree" [ngClass]="{'is-invalid': submitted && f.duree.errors}">
+                            </div>
+                            <div *ngIf="submitted && f.duree.errors">
+                                <div class="erreur" *ngIf="f.duree.errors.required">Entrer une durée</div>
+                            </div>
+
+
+                            <hr class="my-4" />
+                            <!-- Affectation de l'état -->
+                            <h6 class="heading-small text-muted mb-4">Affectation de l'état</h6>
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-plus"></i>Libellé de
+                                        l'état</span>
+                                </div>
+                                <select class="form-group" class="form-control" [(ngModel)]="tache.etat"
+                                    formControlName="etat" [ngClass]="{'is-invalid': submitted && f.etat.errors}">
+                                    <option>Sélectionnez...</option>
+                                    <option *ngFor="let etat of listeEtat" [ngValue]="etat">{{etat.libelleEtat}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div *ngIf="submitted && f.etat.errors">
+                                <div class="erreur" *ngIf="f.etat.errors.required">Sélectionner un état</div>
+                            </div>
+                            <hr class="my-4" />
+                            <!-- Affectation du personnel -->
+                            <h6 class="heading-small text-muted mb-4">Affectation du personnel</h6>
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-user"></i>Membre du
+                                        personnel</span>
+                                </div>
+                                <select class="form-group" class="form-control" [(ngModel)]="tache.staff"
+                                    formControlName="staff" [ngClass]="{'is-invalid': submitted && f.staff.errors}">
+                                    <option>Sélectionnez...</option>
+                                    <option *ngFor="let staff of listeStaff" [ngValue]="staff">
+                                        {{staff.nom}}</option>
+                                </select>
+                            </div>
+                            <div *ngIf="submitted && f.staff.errors">
+                                <div class="erreur" *ngIf="f.staff.errors.required">Sélectionner un membre du
+                                    personnel
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary mt-4">Ajouter</button>
+                            <button type="reset" class="btn btn-light mt-4">Annuler</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

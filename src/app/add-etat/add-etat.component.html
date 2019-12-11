@@ -1,0 +1,34 @@
+  <!-- Page content -->
+  <div class="container mt--8 pb-5">
+    <!-- Table -->
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <div class="card bg-secondary shadow border-0">          
+          <div class="card-body px-lg-5 py-lg-5">
+            <div class="text-center text-muted mb-4">
+              <h4>Formulaire d'ajout d'un état</h4>
+            </div>
+            <form [formGroup]="etatForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-plus"></i></span>
+                  </div>
+                  <input type="text" id="libelleEtat" placeholder="Libellé de l'état"
+                  [(ngModel)]="etat.libelleEtat" formControlName="libelleEtat"
+                  [ngClass]="{'is-invalid': submitted && f.libelleEtat.errors}">
+                </div>
+                <div *ngIf="submitted && f.libelleEtat.errors">
+                    <div class="erreur" *ngIf="f.libelleEtat.errors.required">Entrer un état</div>
+                </div>
+              </div>            
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary mt-4">Ajouter</button>
+                <button type="reset" class="btn btn-light mt-4">Annuler</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

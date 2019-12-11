@@ -1,0 +1,44 @@
+<div class="container-fluid mt--7">
+    <!-- Dark table -->
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card bg-default shadow">
+                <div class="card-header bg-transparent border-0">
+                    <h3 class="text-black mb-0">Liste du personnel</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-dark table-flush">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Id du Staff</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Prénom</th>
+                                <th scope="col">login</th>
+                                <th scope="col">Password</th>
+                                <th scope="col">Libelle du statut</th>
+                                <th scope="col">Nom de la zone</th>
+                                <th scope="col">Modifier</th>
+                                <th scope="col">Supprimer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let staff of listeStaff |filter:searchText, let i=index">
+                                <td>{{staff.idStaff}}</td>
+                                <td>{{staff.nom}}</td>
+                                <td>{{staff.prenom}}</td>
+                                <td>{{staff.login}}</td>
+                                <td>{{staff.password}}</td>
+                                <td>{{staff.role.libelle}}</td>
+                                <td>{{staff.zone.nom}}</td>
+                                <td><button type="button" class="fa fa-pencil-square-o btn btn-warning"
+                                        [routerLink]="['/modifierPersonnel',staff.idStaff]"></button></td>
+                                <td><button type="button" class="fas fa-trash-alt btn btn-danger"
+                                        (click)="notif(staff.idStaff, i)"></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

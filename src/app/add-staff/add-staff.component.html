@@ -1,0 +1,105 @@
+<!-- Page content -->
+<div class="container mt--8 pb-5">
+    <!-- Table -->
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card bg-secondary shadow border-0">
+                <div class="card-body px-lg-5 py-lg-5">
+                    <div class="text-center text-muted mb-4">
+                        <h4>Formulaire d'ajout de personnel</h4>
+                    </div>
+                    <form [formGroup]="staffForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                </div>
+                                <input type="text" id="nom" placeholder="Nom de la personne" [(ngModel)]="staff.nom"
+                                    formControlName="nom" [ngClass]="{'is-invalid': submitted && f.nom.errors}">
+                            </div>
+                            <div *ngIf="submitted && f.nom.errors">
+                                <div class="erreur" *ngIf="f.nom.errors.required">Entrer un nom</div>
+                            </div>
+
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                </div>
+                                <input type="text" id="prenom" placeholder="Prénom de la personne"
+                                    [(ngModel)]="staff.prenom" formControlName="prenom"
+                                    [ngClass]="{'is-invalid': submitted && f.prenom.errors}">
+                            </div>
+                            <div *ngIf="submitted && f.prenom.errors">
+                                <div class="erreur" *ngIf="f.prenom.errors.required">Entrer un prénom</div>
+                            </div>
+
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-plus"></i></span>
+                                </div>
+                                <input type="text" id="login" placeholder="Login de connection"
+                                    [(ngModel)]="staff.login" formControlName="login"
+                                    [ngClass]="{'is-invalid': submitted && f.login.errors}">
+                            </div>
+                            <div *ngIf="submitted && f.login.errors">
+                                <div class="erreur" *ngIf="f.login.errors.required">Entrer un login</div>
+                            </div>
+
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                </div>
+                                <input type="text" id="password" placeholder="Mot de passe" [(ngModel)]="staff.password"
+                                    formControlName="password" [ngClass]="{'is-invalid': submitted && f.password.errors}">
+                            </div>
+                            <div *ngIf="submitted && f.password.errors">
+                                <div class="erreur" *ngIf="f.password.errors.required">Entrer un mot de passe</div>
+                            </div>
+
+                            <hr class="my-4" />
+                            <!-- Affectation du statut -->
+                            <h6 class="heading-small text-muted mb-4">Affectation du statut</h6>
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-plus"></i>Libelle du statut</span>
+                                </div>
+                                <select class="form-group" class="form-control" [(ngModel)]="staff.role"
+                                    formControlName="role" [ngClass]="{'is-invalid': submitted && f.role.errors}">
+                                    <option>Sélectionnez...</option>
+                                    <option *ngFor="let role of listeRole" [ngValue]="role">{{role.libelle}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div *ngIf="submitted && f.role.errors">
+                                <div class="erreur" *ngIf="f.role.errors.required">Sélectionner un statut</div>
+                            </div>
+                            <hr class="my-4" />
+                            <!-- Affectation à une zone -->
+                            <h6 class="heading-small text-muted mb-4">Affectation à une zone</h6>
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-map"></i>Nom de la zone</span>
+                                </div>
+                                <select class="form-group" class="form-control" [(ngModel)]="staff.zone"
+                                    formControlName="zone" [ngClass]="{'is-invalid': submitted && f.zone.errors}">
+                                    <option>Sélectionnez...</option>
+                                    <option *ngFor="let zone of listeZone" [ngValue]="zone">
+                                        {{zone.nom}}</option>
+                                </select>
+                            </div>
+                            <div *ngIf="submitted && f.zone.errors">
+                                <div class="erreur" *ngIf="f.zone.errors.required">Sélectionner une zone
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary mt-4">Ajouter</button>
+                            <button type="reset" class="btn btn-light mt-4">Annuler</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

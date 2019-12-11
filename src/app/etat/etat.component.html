@@ -1,0 +1,32 @@
+<div class="container-fluid mt--7">
+    <!-- Dark table -->
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card bg-default shadow">
+                <div class="card-header bg-transparent border-0">
+                    <h3 class="text-black mb-0">Liste des états</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-dark table-flush">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Id de l'état</th>
+                                <th scope="col">Libellé de l'état</th>
+                                <th scope="col">Modifier</th>
+                                <th scope="col">Supprimer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let etat of listeEtat |filter:searchText, let i=index">
+                                <td>{{etat.idEtat}}</td>
+                                <td>{{etat.libelleEtat}}</td>
+                                <td><button type="button" class="fa fa-pencil-square-o btn btn-warning" [routerLink]="['/modifierEtat',etat.idEtat]"></button></td>
+                                <td><button type="button" class="fas fa-trash-alt btn btn-danger"  (click)="notif(etat.idEtat, i)"></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

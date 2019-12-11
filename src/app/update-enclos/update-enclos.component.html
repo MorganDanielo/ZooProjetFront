@@ -1,0 +1,65 @@
+<!-- Page content -->
+<div class="container mt--8 pb-5">
+    <!-- Table -->
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card bg-secondary shadow border-0">
+                <div class="card-body px-lg-5 py-lg-5">
+                    <div class="text-center text-muted mb-4">
+                        <h4>Formulaire de modification d'un enclos</h4>
+                    </div>
+                    <form [formGroup]="enclosForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-fat-add"></i></span>
+                                </div>
+                                <select type="text" id="capacite" placeholder="Capacité de l'enclos"
+                                    [(ngModel)]="enclos.capacite" formControlName="capacite"
+                                    [ngClass]="{'is-invalid': submitted && f.capacite.errors}">
+                                    <option>Sélectionnez...</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                            <div *ngIf="submitted && f.capacite.errors">
+                                <div class="erreur" *ngIf="f.capacite.errors.required">Sélectionner une capacité</div>
+                            </div>
+
+                            <hr class="my-4" />
+                            <!-- Affectation zone -->
+                            <h6 class="heading-small text-muted mb-4">Affectation de la zone</h6>
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-fat-add"></i></span>
+                                </div>
+                                <select [compareWith]="byIdZone" class="form-group" class="form-control" [(ngModel)]="enclos.zone"
+                                    formControlName="zone" [ngClass]="{'is-invalid': submitted && f.zone.errors}">
+                                    <option>Sélectionnez...</option>
+                                    <option *ngFor="let zone of listeZone" [ngValue]="zone">{{zone.nom}}</option>
+                                </select>
+                            </div>
+                            <div *ngIf="submitted && f.zone.errors">
+                                <div class="erreur" *ngIf="f.zone.errors.required">Sélectionner une zone</div>
+                            </div>
+
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary mt-4">Ajouter</button>
+                            <button type="reset" class="btn btn-light mt-4">Annuler</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

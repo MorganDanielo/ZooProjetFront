@@ -1,0 +1,36 @@
+<div class="container-fluid mt--7">
+    <!-- Dark table -->
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card bg-default shadow">
+                <div class="card-header bg-transparent border-0">
+                    <h3 class="text-black mb-0">Liste des animaux</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-dark table-flush">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Id de l'animal</th>
+                                <th scope="col">Espèce</th>
+                                <th scope="col">Nom de l'enclos</th>
+                                <th scope="col">Type de nourriture</th>
+                                <th scope="col">Modifier</th>
+                                <th scope="col">Supprimer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let animal of listeAnimaux |filter:searchText, let i=index">
+                                <td>{{animal.idAni}}</td>
+                                <td>{{animal.espece}}</td>
+                                <td>{{animal.enclos.zone.nom}}</td>
+                                <td>{{animal.nourriture.nom}}</td>
+                                <td><button type="button" class="fa fa-pencil-square-o btn btn-warning" [routerLink]="['/modifierAnimal', animal.idAni]"></button></td>
+                                <td><button type="button" class="fas fa-trash-alt btn btn-danger" (click)="notif(animal.idAni,i)"></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
