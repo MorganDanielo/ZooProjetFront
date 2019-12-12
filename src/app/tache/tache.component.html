@@ -24,7 +24,7 @@
                             <tr *ngFor="let tache of listeTaches |filter:searchText, let i=index">
                                 <td>{{tache.idTache}}</td>
                                 <td>{{tache.intitule}}</td>
-                                <td>{{tache.date}}</td>
+                                <td>{{tache.date|date:'dd-MM-yyyy pour hh:mm a'}}</td>
                                 <td>{{tache.duree}}</td>
                                 <td>{{tache.etat.libelleEtat}}</td>
                                 <td>{{tache.staff.nom}}</td>

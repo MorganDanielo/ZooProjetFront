@@ -74,7 +74,7 @@ export class AddTacheComponent implements OnInit {
       confirmButtonText:
         '<i class="fa fa-thumbs-up"></i> Super!',
 
-    }).then(() => this.router.navigate(['/tache']))
+    }).then(() => this.router.navigate(['/planning']))
   }
 
 }

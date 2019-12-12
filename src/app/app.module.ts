@@ -46,7 +46,14 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
+import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
+import {FlatpickrModule} from 'angularx-flatpickr';
+import 'flatpickr/dist/flatpickr.css';
+import { registerLocaleData } from '@angular/common';
+import {DemoUtilsModule} from '../app/planning/formatfrançais/module';
 
+import localeFr from '@angular/common/locales/fr';  
+registerLocaleData(localeFr);
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -80,6 +87,9 @@ import { UpdateStaffComponent } from './update-staff/update-staff.component';
 import { UpdateTacheComponent } from './update-tache/update-tache.component';
 import { AddTacheComponent } from './add-tache/add-tache.component';
 import { ConnectionStaffComponent } from './connection-staff/connection-staff.component';
+import { PlanningComponent } from './planning/planning.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
   declarations: [
@@ -113,6 +123,7 @@ import { ConnectionStaffComponent } from './connection-staff/connection-staff.co
     UpdateTacheComponent,
     AddTacheComponent,
     ConnectionStaffComponent,
+    PlanningComponent,
 
   ],
   imports: [
@@ -169,6 +180,10 @@ import { ConnectionStaffComponent } from './connection-staff/connection-staff.co
     ScrollingModule,
     DlDateTimeDateModule,
     DlDateTimePickerModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
+    DemoUtilsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

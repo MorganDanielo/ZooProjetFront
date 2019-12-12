@@ -43,6 +43,7 @@ export class UpdateTacheComponent implements OnInit {
     this.idTache=parseInt(this.route.snapshot.paramMap.get('id'));
     this.tacheService.getTacheById(this.idTache).subscribe(data=>{
       this.tache=data;
+      this.tache.date=new Date(data['date'])
     });
     this.etatService.getAll().subscribe(data=>{
       this.listeEtat=data;

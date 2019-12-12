@@ -43,7 +43,7 @@ export class TacheComponent implements OnInit {
           }
         });
       }
-    }).then(() => this.router.navigate(['/tache']))
+    }).then(() => this.router.navigate(['/planning']))
   }
 
 }

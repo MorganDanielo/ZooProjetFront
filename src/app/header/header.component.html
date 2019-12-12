@@ -76,6 +76,17 @@
                 </div>
             </li>
         </ul>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle far fa-calendar-check" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Planning
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" [routerLink]="['/planning']">Afficher le planning</a>
+                </div>
+            </li>
+        </ul>
         <ul class="navbar-nav align-items-center d-none d-md-flex">
             <li class="nav-item dropdown">
                 <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -90,7 +101,7 @@
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">Bienvenue!</h6>
                     </div>
-                    <a href="../examples/profile.html" class="dropdown-item">
+                    <a [routerLink]="['/planning']" class="dropdown-item" >
                         <i class="ni ni-calendar-grid-58"></i>
                         <span>Planning</span>
                     </a>
