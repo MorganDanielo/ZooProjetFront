@@ -54,11 +54,13 @@ export class PlanningComponent implements OnInit {
 
   listeTaches: Tache[];
 
+  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+
   view: CalendarView = CalendarView.Month;
 
   viewDate = new Date();
 
-  events: CalendarEvent[] = [];
+ 
 
   locale: string = 'Fr';
 
