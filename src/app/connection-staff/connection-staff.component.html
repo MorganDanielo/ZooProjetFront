@@ -6,7 +6,7 @@
 
                 <div class="card-body px-lg-5 py-lg-5">
                     <div class="text-center text-muted mb-4">
-                        <h3>Connection</h3>
+                        <h4>Connection</h4>
                     </div>
                     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                         <div class="form-group mb-3">
@@ -27,7 +27,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                 </div>
-                                <input class="form-control" placeholder="Mot de passe" type="text"
+                                <input class="form-control" placeholder="Mot de passe" type="password"
                                 [(ngModel)]="user.password" formControlName="password"
                             [ngClass]="{'is-invalid': submitted && f.password.errors}">
                             </div>

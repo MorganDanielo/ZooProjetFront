@@ -1,96 +1,86 @@
 <div class="row text-center">
-        <div class="col-md-4">
-          <div class="btn-group">
-            <div
-              class="btn btn-primary"
-              mwlCalendarPreviousView
-              [view]="view"
-              [(viewDate)]="viewDate"
-            >
-              Précedent
-            </div>
-            <div
-              class="btn btn-outline-secondary"
-              mwlCalendarToday
-              [(viewDate)]="viewDate"
-            >
-              Aujourd'hui
-            </div>
-            <div
-              class="btn btn-primary"
-              mwlCalendarNextView
-              [view]="view"
-              [(viewDate)]="viewDate"
-            >
-              Suivant
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <h3>
-            {{ viewDate | calendarDate:(view + 'ViewTitle'):locale:weekStartsOn }}
-          </h3>
-        </div>
-        <div class="col-md-4">
-          <div class="btn-group">
-            <div
-              class="btn btn-primary"
-              (click)="setView(CalendarView.Month)"
-              [class.active]="view === CalendarView.Month"
-            >
-              Mois
-            </div>
-            <div
-              class="btn btn-primary"
-              (click)="setView(CalendarView.Week)"
-              [class.active]="view === CalendarView.Week"
-            >
-              Semaine
-            </div>
-            <div
-              class="btn btn-primary"
-              (click)="setView(CalendarView.Day)"
-              [class.active]="view === CalendarView.Day"
-            >
-              Jour
-            </div>
-          </div>
-        </div>
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div class="btn btn-primary"
+      mwlCalendarPreviousView [view]="view"
+      [(viewDate)]="viewDate">
+        Précedent
       </div>
-      <br />
-      
-      <div [ngSwitch]="view">
-        <mwl-calendar-month-view
-          *ngSwitchCase="'month'"
-          [viewDate]="viewDate"
-          [events]="events"
-          [locale]="locale"
-          [weekStartsOn]="weekStartsOn"
-          [weekendDays]="weekendDays"
-        >
-        </mwl-calendar-month-view>
-        <mwl-calendar-week-view
-          *ngSwitchCase="'week'"
-          [viewDate]="viewDate"
-          [events]="events"
-          [locale]="locale"
-          [weekStartsOn]="weekStartsOn"
-          [weekendDays]="weekendDays"
-        >
-        </mwl-calendar-week-view>
-        <mwl-calendar-day-view
-          *ngSwitchCase="'day'"
-          [viewDate]="viewDate"
-          [events]="events"
-          [locale]="locale"
-        >
-        </mwl-calendar-day-view>
+      <div class="btn btn-outline-secondary"
+      mwlCalendarToday
+      [(viewDate)]="viewDate">
+        Aujourd'hui
       </div>
+      <div class="btn btn-primary"
+      mwlCalendarNextView [view]="view"
+      [(viewDate)]="viewDate">
+        Suivant
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h3>
+      {{ viewDate | calendarDate:(view + 'ViewTitle'):'Fr' }}
+    </h3>
+  </div>
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div class="btn btn-primary"
+      (click)="setView(CalendarView.Month)"
+      [class.active]="view === CalendarView.Month">
+        Mois
+      </div>
+      <div class="btn btn-primary"
+      (click)="setView(CalendarView.Week)"
+      [class.active]="view === CalendarView.Week">
+        Semaine
+      </div>
+      <div class="btn btn-primary"
+      (click)="setView(CalendarView.Day)"
+      [class.active]="view === CalendarView.Day">
+        Jour
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+
+<div [ngSwitch]="view">
+  <mwl-calendar-month-view *ngSwitchCase="'month'" 
+  [viewDate]="viewDate" 
+  [events]="events"
+  [refresh]="refresh"
+  [activeDayIsOpen]="activeDayIsOpen"
+  (dayClicked)="dayClicked($event.day)"
+  (eventClicked)="handleEvent('Clicked', $event.event)"
+  (eventTimesChanged)="eventTimesChanged($event)"
+  [locale]="locale"
+  [weekStartsOn]="weekStartsOn" 
+  [weekendDays]="weekendDays" >
+  </mwl-calendar-month-view>
+  <mwl-calendar-week-view *ngSwitchCase="'week'" 
+  [viewDate]="viewDate" 
+  [events]="events" 
+  [refresh]="refresh"
+  (eventClicked)="handleEvent('Clicked', $event.event)"
+  (eventTimesChanged)="eventTimesChanged($event)"
+  [locale]="locale"
+  [weekStartsOn]="weekStartsOn" 
+  [weekendDays]="weekendDays">
+  </mwl-calendar-week-view>
+  <mwl-calendar-day-view *ngSwitchCase="'day'"
+  [viewDate]="viewDate"
+  [events]="events"
+  [refresh]="refresh"
+  (eventClicked)="handleEvent('Clicked', $event.event)"
+  (eventTimesChanged)="eventTimesChanged($event)"
+  [locale]="locale">
+  </mwl-calendar-day-view>
+</div>
 
 <!-- Everything you see below is just for the demo, you don't need to include it in your app -->
 
 <br /><br /><br />
-
 <h3>
   Edit events
   <button class="btn btn-primary pull-right" (click)="addEvent()">
@@ -177,48 +167,55 @@
 </div>
 
 <div class="container-fluid mt--7">
-        <!-- Dark table -->
-        <div class="row mt-5">
-            <div class="col">
-                <div class="card bg-default shadow">
-                    <div class="card-header bg-transparent border-0">
-                        <h3 class="text-black mb-0">Liste des tâches</h3>
-                        <button class="btn btn-primary pull-right" (click)="ngOnInt()">
-                                Afficher les tâches
-                              </button>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table align-items-center table-dark table-flush">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">Id de la tâche</th>
-                                    <th scope="col">Intitulé</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Durée (min)</th>
-                                    <th scope="col">Etat de la tâche</th>
-                                    <th scope="col">Personnel</th>
-                                    <th scope="col">Modifier</th>
-                                    <th scope="col">Supprimer</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let tache of listeTaches |filter:searchText, let i=index">
-                                    <td>{{tache.idTache}}</td>
-                                    <td>{{tache.intitule}}</td>
-                                    <td>{{tache.date|date:'dd-MM-yyyy pour hh:mm a'}}</td>
-                                    <td>{{tache.duree}}</td>
-                                    <td>{{tache.etat.libelleEtat}}</td>
-                                    <td>{{tache.staff.nom}}</td>
-                                    <td><button type="button" class="fa fa-pencil-square-o btn btn-warning" [routerLink]="['/modifierTache',tache.idTache]"></button></td>
-                                    <td><button type="button" class="fas fa-trash-alt btn btn-danger" (click)="notif(tache.idTache,i)"></button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+  <!-- Dark table -->
+  <div class="row mt-5">
+    <div class="col">
+      <div class="card bg-default shadow">
+        <div class="card-header bg-transparent border-0">
+          <h3 class="text-black mb-0">Liste des tâches</h3>
+          <button class="btn btn-primary pull-right" (click)="afficher()">
+            Afficher les tâches
+          </button>
         </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-dark table-flush">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Id de la tâche</th>
+                <th scope="col">Intitulé</th>
+                <th scope="col">Date</th>
+                <th scope="col">Durée (min)</th>
+                <th scope="col">Etat de la tâche</th>
+                <th scope="col">Personnel</th>
+                <th scope="col">Modifier</th>
+                <th scope="col">Supprimer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tache of listeTaches |filter:searchText, let i=index">
+                <td>{{tache.idTache}}</td>
+                <td>{{tache.intitule}}</td>
+                <td>{{tache.date|date:'dd-MM-yyyy, hh:mm a'}}</td>
+                <td>{{tache.duree}}</td>
+                <td>{{tache.etat.libelleEtat}}</td>
+                <td>{{tache.staff.nom}}</td>
+                <td><button type="button" class="fa fa-pencil-square-o btn btn-warning"
+                    [routerLink]="['/modifierTache',tache.idTache]"></button></td>
+                <td><button type="button" class="fas fa-trash-alt btn btn-danger"
+                    (click)="notif(tache.idTache,i)"></button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="card-header bg-transparent border-0">
+          <button class="btn btn-primary pull-right" [routerLink]="['/ajoutTache']">
+            Ajouter une tâche
+          </button>
+        </div>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
 
 <ng-template #modalContent let-close="close">
   <div class="modal-header">

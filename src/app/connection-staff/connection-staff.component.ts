@@ -15,7 +15,7 @@ export class ConnectionStaffComponent implements OnInit {
 
   loginForm:FormGroup;
 
-   submitted=false;
+  submitted=false;
 
   constructor(private formBuilder:FormBuilder, private router:Router, private authService:AuthentificationService) {
     this.loginForm=this.formBuilder.group({

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthentificationService } from '../Services/authentification.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  user;
+
+  helper=new JwtHelperService();
+
+  constructor(private authService:AuthentificationService) { }
 
   ngOnInit() {
+    this.user=this.helper.decodeToken(localStorage.getItem('currentUser'))['user'];  
+
+  }
+
+  isLoggedIn(){
+    return this.authService.isLoggedIn();
+  }
+
+  logout(){
+    return this.authService.logout();
   }
 
 }

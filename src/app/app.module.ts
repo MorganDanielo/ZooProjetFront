@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {CommonModule} from '@angular/common';
 import{HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
@@ -184,6 +185,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     NgbModalModule,
     FlatpickrModule.forRoot(),
     DemoUtilsModule,
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -27,141 +27,151 @@ import { AddTacheComponent } from './add-tache/add-tache.component';
 import { UpdateTacheComponent } from './update-tache/update-tache.component';
 import { ConnectionStaffComponent } from './connection-staff/connection-staff.component';
 import { PlanningComponent } from './planning/planning.component';
+import { AuthGuardService } from './Services/auth-guard.service';
 
 
 const routes: Routes = [
   {
-    path:'',
-    redirectTo:'accueil',
-    pathMatch:'full'
+    path: '',
+    redirectTo: 'accueil',
+    pathMatch: 'full'
   },
   {
-    path:"accueil",
-    component:AccueilComponent
+    path: "accueil",
+    component: AccueilComponent
   },
   {
-    path:"etat",
-    component:EtatComponent
+    path: "etat",
+    component: EtatComponent,
+    canActivate: [AuthGuardService]
   },
   {
-    path:"enclos",
-    component:ENclosComponent
+    path: "enclos",
+    component: ENclosComponent,
+    canActivate: [AuthGuardService]
+
   },
   {
-    path:"role",
-    component:RoleComponent
+    path: "role",
+    component: RoleComponent,
+    canActivate: [AuthGuardService]
   },
   {
-    path:"personnel",
-    component:StaffComponent
-     
+    path: "personnel",
+    component: StaffComponent,
+    canActivate: [AuthGuardService]
   },
   {
-    path:"zone",
-    component:ZoneComponent
+    path: "zone",
+    component: ZoneComponent,
+    canActivate: [AuthGuardService]
   },
   {
-    path:"nourriture",
-    component:NourritureComponent
+    path: "nourriture",
+    component: NourritureComponent,
+    canActivate: [AuthGuardService]
   },
   {
-    path:"animaux",
-    component:AnimalComponent
+    path: "animaux",
+    component: AnimalComponent,
+    canActivate: [AuthGuardService]
   },
   {
-    path:"tache",
-    component:TacheComponent
-     
+    path: "tache",
+    component: TacheComponent,
+    canActivate: [AuthGuardService]
   },
   {
-    path:"ajoutEtat",
-    component:AddEtatComponent
-     
+    path: "ajoutEtat",
+    component: AddEtatComponent,
+    canActivate: [AuthGuardService]
   },
   {
-    path:"modifierEtat/:id",
-    component:UpdateEtatComponent
-     
+    path: "modifierEtat/:id",
+    component: UpdateEtatComponent,
+    canActivate: [AuthGuardService]
   },
   {
-    path:"ajoutZone",
-    component:AddZoneComponent
-     
+    path: "ajoutZone",
+    component: AddZoneComponent,
+    canActivate: [AuthGuardService]
   },
   {
-    path:"modifierZone/:id",
-    component:UpdateZoneComponent
-     
+    path: "modifierZone/:id",
+    component: UpdateZoneComponent,
+    canActivate: [AuthGuardService]
   },
   {
-    path:"ajoutRole",
-    component:AddRoleComponent
-     
+    path: "ajoutRole",
+    component: AddRoleComponent,
+    canActivate: [AuthGuardService]
   },
   {
-    path:"modifierRole/:id",
-    component:UpdateRoleComponent
-     
+    path: "modifierRole/:id",
+    component: UpdateRoleComponent,
+    canActivate: [AuthGuardService]
   },
   {
-    path:"ajoutEnclos",
-    component:AddEnclosComponent
-     
+    path: "ajoutEnclos",
+    component: AddEnclosComponent,
+    canActivate : [AuthGuardService]
   },
   {
-    path:"modifierEnclos/:id",
-    component:UpdateEnclosComponent
-     
+    path: "modifierEnclos/:id",
+    component: UpdateEnclosComponent,
+    canActivate : [AuthGuardService]
   },
   {
-    path:"ajoutNourriture",
-    component:AddNourritureComponent
-     
+    path: "ajoutNourriture",
+    component: AddNourritureComponent,
+    canActivate : [AuthGuardService]
   },
   {
-    path:"modifierNourriture/:id",
-    component:UpdateNourritureComponent
+    path: "modifierNourriture/:id",
+    component: UpdateNourritureComponent,
+    canActivate : [AuthGuardService]
   },
   {
-    path:"ajoutAnimaux",
-    component:AddAnimalComponent
-     
+    path: "ajoutAnimaux",
+    component: AddAnimalComponent,
+    canActivate : [AuthGuardService]
   },
   {
-    path:"modifierAnimal/:id",
-    component:UpdateAnimalComponent
-     
+    path: "modifierAnimal/:id",
+    component: UpdateAnimalComponent,
+    canActivate : [AuthGuardService]
   },
   {
-    path:"ajoutPersonnel",
-    component:AddStaffComponent
-     
+    path: "ajoutPersonnel",
+    component: AddStaffComponent,
+    canActivate : [AuthGuardService]
   },
   {
-    path:"modifierPersonnel/:id",
-    component:UpdateStaffComponent
-     
+    path: "modifierPersonnel/:id",
+    component: UpdateStaffComponent,
+    canActivate : [AuthGuardService]
   },
   {
-    path:"ajoutTache",
-    component:AddTacheComponent
-     
+    path: "ajoutTache",
+    component: AddTacheComponent,
+    canActivate : [AuthGuardService]
   },
   {
-    path:"modifierTache/:id",
-    component:UpdateTacheComponent
-     
+    path: "modifierTache/:id",
+    component: UpdateTacheComponent,
+    canActivate : [AuthGuardService]
   },
   {
-    path:"login",
-    component:ConnectionStaffComponent
+    path: "login",
+    component: ConnectionStaffComponent
   },
   {
-    path:"planning",
-    component:PlanningComponent
+    path: "planning",
+    component: PlanningComponent,
+    canActivate : [AuthGuardService]
   }
 
-  
+
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
 import {
+  Component,
+  OnInit,
   ChangeDetectionStrategy,
   ViewChild,
   TemplateRef
@@ -53,6 +54,7 @@ const colors: any = {
 export class PlanningComponent implements OnInit {
 
   listeTaches: Tache[];
+  tache:Tache=new Tache();
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
@@ -78,10 +80,10 @@ export class PlanningComponent implements OnInit {
 
   actions: CalendarEventAction[] = [
     {
-      label: '<i class="fa fa-fw fa-pencil"></i>',
-      a11yLabel: 'Edit',
+      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
+      a11yLabel: 'Editer',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
+        this.handleEvent('Modifier', event);
       }
     },
     {
@@ -89,7 +91,7 @@ export class PlanningComponent implements OnInit {
       a11yLabel: 'Delete',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Deleted', event);
+        this.handleEvent('Supprimé', event);
       }
     }
   ];
@@ -109,6 +111,12 @@ export class PlanningComponent implements OnInit {
         afterEnd: true
       },
       draggable: true
+    },
+    {
+      start: startOfDay(new Date()),
+      title: 'An event with no end date',
+      color: colors.yellow,
+      actions: this.actions
     },
     {
       start: startOfDay(new Date()),
@@ -139,7 +147,7 @@ export class PlanningComponent implements OnInit {
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal, private tacheService: TacheService, private router: Router) { }
+  constructor(private modal:NgbModal ,private tacheService: TacheService, private router: Router) { }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -182,7 +190,7 @@ export class PlanningComponent implements OnInit {
     this.events = [
       ...this.events,
       {
-        title: 'Nouvelle tâche',
+        title: 'New event',
         start: startOfDay(new Date()),
         end: endOfDay(new Date()),
         color: colors.red,
@@ -195,24 +203,20 @@ export class PlanningComponent implements OnInit {
     ];
   }
 
-
-
-  // deleteEvent(eventToDelete: CalendarEvent) {
-  //  this.events = this.events.filter(event => event !== eventToDelete);
-  // }
-
-  setView(view: CalendarView) {
-    this.view = view;
+  deleteEvent(eventToDelete: CalendarEvent) {
+    this.events = this.events.filter(event => event !== eventToDelete);
   }
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
   }
 
+  setView(view: CalendarView) {
+    this.view = view;
+  }
+
   ngOnInit() {
-    this.tacheService.getAllTache().subscribe(data => {
-      this.listeTaches = data;
-    });
+    
   }
 
   notif(idTache: number, index) {
@@ -239,5 +243,12 @@ export class PlanningComponent implements OnInit {
       }
     }).then(() => this.router.navigate(['/planning']))
   }
+  
+  afficher(){
+     this.tacheService.getAllTache().subscribe(data => {
+    this.listeTaches = data;
+  });
+  }
+ 
 
 }

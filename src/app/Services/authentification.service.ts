@@ -22,45 +22,15 @@ export class AuthentificationService {
   login(login, password) {
     this.loginWebService(login, password).subscribe(res => {
       console.log("REPONSE LOGIN" + res)
-      if (res != null) {
-        localStorage.setItem('currentUSer', res['token'])
+      if (res  != null) {
+        localStorage.setItem('currentUser', res['token'])
       }
       if (localStorage.getItem('currentUser') != null) {
-        this.notif();
+        this.notifReussite();
       } else {
-        this.notif2();
+        this.notifEchec();
       }
     });
-  }
-
-  notif3() {
-    Swal.fire({
-      title: 'Vous êtes déconnecté(e)',
-      icon: 'success',
-      showCloseButton: true,
-      confirmButtonText:
-        '<i class="fa fa-thumbs-up"></i> Super!',
-
-    }).then(() => this.router.navigate(['/accueil']))
-  }
-
-  notif() {
-    Swal.fire({
-      title: 'Vous êtes connecté(e)',
-      icon: 'success',
-      showCloseButton: true,
-      confirmButtonText:
-        '<i class="fa fa-thumbs-up"></i> Super!',
-
-    }).then(() => this.router.navigate(['/accueil']))
-  }
-  notif2() {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Erreur d authentification!',
-
-    }).then(() => this.router.navigate(['/login']))
   }
 
   isLoggedIn() {
@@ -72,6 +42,38 @@ export class AuthentificationService {
 
   logout() {
     localStorage.removeItem('currentUser');
-    this.notif3()
+    this.notifDeco()
   }
+
+  notifDeco() {
+    Swal.fire({
+      title: 'Vous êtes déconnecté(e)',
+      icon: 'success',
+      showCloseButton: true,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> Super!',
+
+    }).then(() => this.router.navigate(['/accueil']))
+  }
+
+  notifReussite() {
+    Swal.fire({
+      title: 'Vous êtes connecté(e)',
+      icon: 'success',
+      showCloseButton: true,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> Super!',
+
+    }).then(() => this.router.navigate(['/accueil']))
+  }
+  notifEchec() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Erreur d authentification!',
+
+    }).then(() => this.router.navigate(['/login']))
+  }
+
+  
 }
