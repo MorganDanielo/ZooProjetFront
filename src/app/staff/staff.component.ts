@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Staff } from '../Models/Staff';
 import { Zone } from '../Models/Zone';
 import Swal from 'sweetalert2';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { StatutService } from '../Services/statut.service';
 
 @Component({
   selector: 'app-staff',
@@ -14,13 +16,18 @@ export class StaffComponent implements OnInit {
 
   listeStaff:Staff[];
   zone:Zone;
+  staff:Staff=new Staff();
+  statut:string;
+  helper=new JwtHelperService();
 
-  constructor(private staffService:StaffService, private router:Router, private route:ActivatedRoute) { }
+  constructor(private staffService:StaffService, private router:Router, private route:ActivatedRoute,private statutService:StatutService) { }
 
   ngOnInit() {
     this.staffService.getAllStaff().subscribe(data=>{
       this.listeStaff=data;
     });
+    this.staff=this.helper.decodeToken(localStorage.getItem('currentUser'))['user'];
+    this.statut=this.statutService.statut()
   }
 
   notif(idStaff: number, index) {

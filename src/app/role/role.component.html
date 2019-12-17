@@ -20,8 +20,8 @@
                             <tr *ngFor="let role of listeRole |filter:searchText, let i=index">
                                 <td>{{role.idRole}}</td>
                                 <td>{{role.libelle}}</td>
-                                <td><button type="button" class="fa fa-pencil-square-o btn btn-warning" [routerLink]="['/modifierRole',role.idRole]"></button></td>
-                                <td><button type="button" class="fas fa-trash-alt btn btn-danger" (click)="notif(role.idRole, i)"></button></td>
+                                <td><button type="button" class="fa fa-pencil-square-o btn btn-warning" [routerLink]="['/modifierRole',role.idRole]" [disabled]="isEmploye" disabled></button></td>
+                                <td><button type="button" class="fas fa-trash-alt btn btn-danger" (click)="notif(role.idRole, i)" [disabled]="isEmploye" disabled></button></td>
                             </tr>
                         </tbody>
                     </table>

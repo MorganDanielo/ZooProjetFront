@@ -43,6 +43,7 @@ export class AuthentificationService {
   logout() {
     localStorage.removeItem('currentUser');
     this.notifDeco()
+    window.location.href=""
   }
 
   notifDeco() {
@@ -51,9 +52,8 @@ export class AuthentificationService {
       icon: 'success',
       showCloseButton: true,
       confirmButtonText:
-        '<i class="fa fa-thumbs-up"></i> Super!',
-
-    }).then(() => this.router.navigate(['/accueil']))
+        '<i class="fa fa-thumbs-up"></i> Super!',        
+    })
   }
 
   notifReussite() {

@@ -55,6 +55,7 @@ import {DemoUtilsModule} from '../app/planning/formatfrançais/module';
 
 import localeFr from '@angular/common/locales/fr';  
 registerLocaleData(localeFr);
+import {FullCalendarModule} from '@fullcalendar/angular'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -91,6 +92,8 @@ import { ConnectionStaffComponent } from './connection-staff/connection-staff.co
 import { PlanningComponent } from './planning/planning.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { AgendaComponent } from './agenda/agenda.component';
+import { PlanningStaffComponent } from './planning-staff/planning-staff.component';
 
 @NgModule({
   declarations: [
@@ -125,6 +128,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     AddTacheComponent,
     ConnectionStaffComponent,
     PlanningComponent,
+    AgendaComponent,
+    PlanningStaffComponent,
 
   ],
   imports: [
@@ -186,6 +191,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     FlatpickrModule.forRoot(),
     DemoUtilsModule,
     CommonModule,
+    FullCalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

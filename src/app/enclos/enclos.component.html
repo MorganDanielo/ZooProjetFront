@@ -23,9 +23,9 @@
                                 <td>{{enclos.capacite}}</td>
                                 <td>{{enclos.zone.nom}}</td>
                                 <td><button type="button" class="fa fa-pencil-square-o btn btn-warning" [routerLink]="['/modifierEnclos', enclos.idEnclos]"
-                                    ></button></td>
+                                    [disabled]="isEmploye" disabled></button></td>
                                 <td><button type="button" class="fas fa-trash-alt btn btn-danger" (click)="notif(enclos.idEnclos, i)"
-                                    ></button></td>
+                                    [disabled]="isEmploye" disabled ></button></td>
                             </tr>
                         </tbody>
                     </table>

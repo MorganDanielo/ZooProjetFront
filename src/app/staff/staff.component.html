@@ -31,9 +31,9 @@
                                 <td>{{staff.role.libelle}}</td>
                                 <td>{{staff.zone.nom}}</td>
                                 <td><button type="button" class="fa fa-pencil-square-o btn btn-warning"
-                                        [routerLink]="['/modifierPersonnel',staff.idStaff]"></button></td>
+                                        [routerLink]="['/modifierPersonnel',staff.idStaff]" *ngIf="statut=='Administrateur' || statut=='Manager'"></button></td>
                                 <td><button type="button" class="fas fa-trash-alt btn btn-danger"
-                                        (click)="notif(staff.idStaff, i)"></button></td>
+                                        (click)="notif(staff.idStaff, i)" *ngIf="statut=='Administrateur' || statut=='Manager'"></button></td>
                             </tr>
                         </tbody>
                     </table>

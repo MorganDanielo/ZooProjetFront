@@ -3,7 +3,8 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   ViewChild,
-  TemplateRef
+  TemplateRef,
+  ChangeDetectorRef
 } from '@angular/core';
 import {
   startOfDay,
@@ -22,12 +23,14 @@ import {
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
   CalendarView,
-  DAYS_OF_WEEK
+  DAYS_OF_WEEK,
 } from 'angular-calendar';
 import { Tache } from '../Models/Tache';
 import { TacheService } from '../Services/Tache/tache.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 const colors: any = {
@@ -72,6 +75,8 @@ export class PlanningComponent implements OnInit {
 
   CalendarView = CalendarView;
 
+  list = [];
+
 
   modalData: {
     action: string;
@@ -88,66 +93,21 @@ export class PlanningComponent implements OnInit {
     },
     {
       label: '<i class="fa fa-fw fa-times"></i>',
-      a11yLabel: 'Delete',
+      a11yLabel: 'Supprimer',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Supprimé', event);
+        this.handleEvent('Supprimer', event);
       }
     }
   ];
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
-  ];
+  events: CalendarEvent[] = []; 
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal:NgbModal ,private tacheService: TacheService, private router: Router) { }
+  constructor(private modal:NgbModal ,private tacheService: TacheService, private router: Router,private cd: ChangeDetectorRef) { }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -215,8 +175,34 @@ export class PlanningComponent implements OnInit {
     this.view = view;
   }
 
-  ngOnInit() {
+  ngOnInit(){
+    this.events = []
+    this.tacheService.getAllTache().subscribe(data => {
+      this.listeTaches = data;
+      this.events = []
+      this.listeTaches.forEach(tache => {
+        this.events = [ ...this.events, {
+          start: tache.date,
+          title: tache.intitule,
+          color: colors.red,
+          actions: this.actions,
+          allDay: true,
+          resizable: {
+            beforeStart: true,
+            afterEnd: true
+          },
+          draggable: true
+        }]
+        
+      });
+      
+      
+      })
+      console.log(this.events)
+      
+      
     
+
   }
 
   notif(idTache: number, index) {
@@ -245,7 +231,7 @@ export class PlanningComponent implements OnInit {
   }
   
   afficher(){
-     this.tacheService.getAllTache().subscribe(data => {
+    this.tacheService.getAllTache().subscribe(data => {
     this.listeTaches = data;
   });
   }

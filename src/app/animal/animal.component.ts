@@ -3,6 +3,8 @@ import { Animal } from '../Models/Animal';
 import { AnimalService } from '../Services/Animal/animal.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Staff } from '../Models/Staff';
+import { StatutService } from '../Services/statut.service';
 
 @Component({
   selector: 'app-animal',
@@ -13,13 +15,22 @@ export class AnimalComponent implements OnInit {
 
   listeAnimaux:Animal[];
   animal:Animal;
+  staff:Staff=new Staff();
+  statut:string;
+  isEmploye=false;
 
-  constructor(private aniService:AnimalService, private router:Router, private route:ActivatedRoute) { }
+  constructor(private aniService:AnimalService, private router:Router, private route:ActivatedRoute, private statutService:StatutService) { }
 
   ngOnInit() {
     this.aniService.getAllAnimal().subscribe(data=>{
       this.listeAnimaux=data;
     });
+    this.statut=this.statutService.statut();
+    if (this.statut == "Employe") {
+      this.isEmploye = true;
+    } else {
+      this.isEmploye = false;
+    }
   }
 
   notif(idAni: number, index) {

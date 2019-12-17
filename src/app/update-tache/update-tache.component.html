@@ -16,7 +16,7 @@
                                 </div>
                                 <input type="text" id="intitule" placeholder="Intitulé de la tâche"
                                     [(ngModel)]="tache.intitule" formControlName="intitule"
-                                    [ngClass]="{'is-invalid': submitted && f.intitule.errors}">
+                                    [ngClass]="{'is-invalid': submitted && f.intitule.errors}" [disabled]="isEmploye" disabled>
                             </div>
                             <div *ngIf="submitted && f.intitule.errors">
                                 <div class="erreur" *ngIf="f.intitule.errors.required">Entrer un intitulé</div>
@@ -30,7 +30,7 @@
                                 </div>
                                 <dl-date-time-picker startView="day" maxView="year" minView="minute" minuteStep="5"
                                     [(ngModel)]="tache.date" formControlName="date"
-                                    [ngClass]="{'is-invalid': submitted && f.date.errors}">
+                                    [ngClass]="{'is-invalid': submitted && f.date.errors}" >
                                 </dl-date-time-picker>
                             </div>
                             <div *ngIf="submitted && f.date.errors">
@@ -42,7 +42,7 @@
                                     <span class="input-group-text"><i class="fas fa-clock"></i></span>
                                 </div>
                                 <input type="text" id="duree" placeholder="Durée de la tâche" [(ngModel)]="tache.duree"
-                                    formControlName="duree" [ngClass]="{'is-invalid': submitted && f.duree.errors}">
+                                    formControlName="duree" [ngClass]="{'is-invalid': submitted && f.duree.errors}" [disabled]="isEmploye" disabled>
                             </div>
                             <div *ngIf="submitted && f.duree.errors">
                                 <div class="erreur" *ngIf="f.duree.errors.required">Entrer une durée</div>
@@ -66,7 +66,7 @@
                                 </select>
                             </div>
                             <div *ngIf="submitted && f.etat.errors">
-                                <div class="erreur" *ngIf="f.etat.errors.required">Sélectionner un enclos</div>
+                                <div class="erreur" *ngIf="f.etat.errors.required">Sélectionner un etat</div>
                             </div>
                             <hr class="my-4" />
                             <!-- Affectation du personnel -->
@@ -78,7 +78,7 @@
                                 </div>
                                 <select [compareWith]="byIdStaff" class="form-group" class="form-control"
                                     [(ngModel)]="tache.staff" formControlName="staff"
-                                    [ngClass]="{'is-invalid': submitted && f.staff.errors}">
+                                    [ngClass]="{'is-invalid': submitted && f.staff.errors}" [disabled]="isEmploye" disabled>
                                     <option>Sélectionnez...</option>
                                     <option *ngFor="let staff of listeStaff" [ngValue]="staff">
                                         {{staff.nom}}</option>
@@ -92,7 +92,7 @@
 
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary mt-4">Modifier</button>
+                            <button type="submit" class="btn btn-primary mt-4" >Modifier</button>
                             <button type="reset" class="btn btn-light mt-4">Annuler</button>
                         </div>
                     </form>

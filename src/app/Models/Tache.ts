@@ -1,6 +1,6 @@
 export class Tache{
     idTache:number;
-    intitule:String;
+    intitule:string;
     date:Date;
     duree:number;
     etat:any;

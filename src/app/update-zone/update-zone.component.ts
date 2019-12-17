@@ -5,6 +5,9 @@ import { ZoneService } from '../Services/Zone/zone.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { parse } from 'querystring';
 import Swal from 'sweetalert2';
+import { Staff } from '../Models/Staff';
+import { StatutService } from '../Services/statut.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-update-zone',
@@ -12,10 +15,11 @@ import Swal from 'sweetalert2';
   styleUrls: ['./update-zone.component.css']
 })
 export class UpdateZoneComponent implements OnInit {
-
+  
   zone:Zone=new Zone();
   idZone:number;
-
+  
+  
   zoneForm:FormGroup
   submitted=false;
 
@@ -30,6 +34,7 @@ export class UpdateZoneComponent implements OnInit {
     this.zoneService.getZoneById(this.idZone).subscribe(data=>{
       this.zone=data;
     });
+    
   }
 
   get f() {return this.zoneForm.controls}

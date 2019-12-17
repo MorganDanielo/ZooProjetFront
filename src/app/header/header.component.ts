@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthentificationService } from '../Services/authentification.service';
+import { Staff } from '../Models/Staff';
+import { StatutService } from '../Services/statut.service';
 
 @Component({
   selector: 'app-header',
@@ -9,15 +11,17 @@ import { AuthentificationService } from '../Services/authentification.service';
 })
 export class HeaderComponent implements OnInit {
 
-  user;
+  staff:Staff=new Staff();
+  statut:String
 
   helper=new JwtHelperService();
 
-  constructor(private authService:AuthentificationService) { }
+  constructor(private authService:AuthentificationService, private statutService:StatutService) { }
 
   ngOnInit() {
-    this.user=this.helper.decodeToken(localStorage.getItem('currentUser'))['user'];  
-
+    this.staff=this.helper.decodeToken(localStorage.getItem('currentUser'))['user'];
+    this.statut=this.statutService.statut()
+    
   }
 
   isLoggedIn(){

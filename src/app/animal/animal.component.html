@@ -24,8 +24,8 @@
                                 <td>{{animal.espece}}</td>
                                 <td>{{animal.enclos.zone.nom}}</td>
                                 <td>{{animal.nourriture.nom}}</td>
-                                <td><button type="button" class="fa fa-pencil-square-o btn btn-warning" [routerLink]="['/modifierAnimal', animal.idAni]"></button></td>
-                                <td><button type="button" class="fas fa-trash-alt btn btn-danger" (click)="notif(animal.idAni,i)"></button></td>
+                                <td><button type="button" class="fa fa-pencil-square-o btn btn-warning" [routerLink]="['/modifierAnimal', animal.idAni]" [disabled]="isEmploye" disabled></button></td>
+                                <td><button type="button" class="fas fa-trash-alt btn btn-danger" (click)="notif(animal.idAni,i)" [disabled]="isEmploye" disabled></button></td>
                             </tr>
                         </tbody>
                     </table>

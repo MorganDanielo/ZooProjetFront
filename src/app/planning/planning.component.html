@@ -81,34 +81,35 @@
 <!-- Everything you see below is just for the demo, you don't need to include it in your app -->
 
 <br /><br /><br />
-<h3>
-  Edit events
-  <button class="btn btn-primary pull-right" (click)="addEvent()">
-    Add new
+<!-- <h3>
+  Liste des tâches
+  <button class="btn btn-primary pull-right" [routerLink]="['/ajoutTache']">
+    Ajouter une nouvelle tâche
   </button>
   <div class="clearfix"></div>
 </h3>
 
 <div class="table-responsive">
-  <table class="table table-bordered">
+  <table class="table align-items-center table-dark table-flush">
     <thead>
       <tr>
-        <th>Title</th>
+        <th>Intitulé</th>
         <th>Primary color</th>
         <th>Secondary color</th>
-        <th>Starts at</th>
-        <th>Ends at</th>
-        <th>Remove</th>
+        <th>Date</th>
+        <th>Durée</th>
+        <th>Modifier</th>
+        <th>Supprimer</th>
       </tr>
     </thead>
 
     <tbody>
-      <tr *ngFor="let event of events">
+      <tr *ngFor="let tache of listeTaches">
         <td>
           <input
             type="text"
             class="form-control"
-            [(ngModel)]="event.title"
+            [(ngModel)]="tache.intitule"
             (keyup)="refresh.next()"
           />
         </td>
@@ -131,7 +132,7 @@
             class="form-control"
             type="text"
             mwlFlatpickr
-            [(ngModel)]="event.start"
+            [(ngModel)]="tache.date"
             (ngModelChange)="refresh.next()"
             [altInput]="true"
             [convertModelValue]="true"
@@ -146,7 +147,7 @@
             class="form-control"
             type="text"
             mwlFlatpickr
-            [(ngModel)]="event.end"
+            [(ngModel)]="tache.duree"
             (ngModelChange)="refresh.next()"
             [altInput]="true"
             [convertModelValue]="true"
@@ -156,15 +157,14 @@
             placeholder="Not set"
           />
         </td>
-        <td>
-          <button class="btn btn-danger" (click)="deleteEvent(event)">
-            Delete
-          </button>
-        </td>
+        <td><button type="button" class="fa fa-pencil-square-o btn btn-warning"
+          [routerLink]="['/modifierTache',tache.idTache]"></button></td>
+      <td><button type="button" class="fas fa-trash-alt btn btn-danger"
+          (click)="notif(tache.idTache,i)"></button></td>
       </tr>
     </tbody>
   </table>
-</div>
+</div> -->
 
 <div class="container-fluid mt--7">
   <!-- Dark table -->
@@ -175,6 +175,11 @@
           <h3 class="text-black mb-0">Liste des tâches</h3>
           <button class="btn btn-primary pull-right" (click)="afficher()">
             Afficher les tâches
+          </button>
+        </div>
+        <div class="card-header bg-transparent border-0">
+          <button class="btn btn-primary pull-right" [routerLink]="['/ajoutTache']">
+            Ajouter une nouvelle tâche
           </button>
         </div>
         <div class="table-responsive">
@@ -206,11 +211,6 @@
               </tr>
             </tbody>
           </table>
-          <div class="card-header bg-transparent border-0">
-          <button class="btn btn-primary pull-right" [routerLink]="['/ajoutTache']">
-            Ajouter une tâche
-          </button>
-        </div>
         </div>
       </div>
     </div>

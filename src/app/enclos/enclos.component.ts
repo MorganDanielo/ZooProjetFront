@@ -4,6 +4,8 @@ import { EnclosService } from '../Services/Enclos/enclos.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Zone } from '../Models/Zone';
 import Swal from 'sweetalert2';
+import { Staff } from '../Models/Staff';
+import { StatutService } from '../Services/statut.service';
 
 @Component({
   selector: 'app-enclos',
@@ -15,13 +17,22 @@ export class ENclosComponent implements OnInit {
   listeEnclos:Enclos[];
   enclos :Enclos;
   zone:Zone;
+  staff:Staff=new Staff();
+  statut:string;
+  isEmploye=false;
 
-  constructor(private enclosService:EnclosService, private router:Router, private route:ActivatedRoute) { }
+  constructor(private enclosService:EnclosService, private router:Router, private route:ActivatedRoute, private statutService:StatutService) { }
 
   ngOnInit() {
     this.enclosService.getAllEnclos().subscribe(data=>{
       this.listeEnclos=data;
     });
+    this.statut=this.statutService.statut();
+    if (this.statut == "Employe") {
+      this.isEmploye = true;
+    } else {
+      this.isEmploye = false;
+    }
   }
 
   notif(idEnclos: number, index) {

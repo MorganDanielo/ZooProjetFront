@@ -29,4 +29,8 @@ export class TacheService {
     return this.http.put("http://localhost:8080/tache/"+idTache, tache).pipe()
   }
 
+  getTacheByIdStaff(idStaff:number){
+    return this.http.get<Tache[]>("http://localhost:8080/tache/staff/"+idStaff).pipe()
+  }
+
 }

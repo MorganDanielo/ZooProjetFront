@@ -13,30 +13,16 @@
                     Personnel
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" [routerLink]="['/ajoutPersonnel']">Ajouter</a>
-                    <a class="dropdown-item" [routerLink]="['/personnel']">Lister</a>
+                    <a class="dropdown-item" [routerLink]="['/ajoutPersonnel']" *ngIf="statut=='Administrateur' || statut=='Manager'">Ajouter</a>
+                    <a class="dropdown-item" [routerLink]="['/personnel']" *ngIf="statut=='Administrateur' || statut=='Manager'">Lister</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" [routerLink]="['/ajoutRole']">Ajouter un statut</a>
+                    <a class="dropdown-item" [routerLink]="['/ajoutRole']" *ngIf="statut=='Administrateur'">Ajouter un statut</a>
                     <a class="dropdown-item" [routerLink]="['/role']">Lister les statuts</a>
 
                 </div>
             </li>
         </ul>
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle fa fa-th-list" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Tâches
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" [routerLink]="['/ajoutTache']">Ajouter</a>
-                    <a class="dropdown-item" [routerLink]="['/tache']">Lister</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" [routerLink]="['/etat']">Lister les états</a>
-                    <a class="dropdown-item" [routerLink]="['/ajoutEtat']">Ajouter un état</a>
-                </div>
-            </li>
-        </ul>
+        
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle fas fa-paw" href="#" id="navbarDropdown" role="button"
@@ -44,7 +30,7 @@
                     Animaux
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" [routerLink]="['/ajoutAnimaux']">Ajouter</a>
+                    <a class="dropdown-item" [routerLink]="['/ajoutAnimaux']" *ngIf="statut=='Administrateur' || statut=='Manager'">Ajouter</a>
                     <a class="dropdown-item" [routerLink]="['/animaux']">Lister</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" [routerLink]="['/ajoutNourriture']">Ajouter Nourriture</a>
@@ -59,7 +45,7 @@
                     Enclos
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" [routerLink]="['/ajoutEnclos']">Ajouter</a>
+                    <a class="dropdown-item" [routerLink]="['/ajoutEnclos']" *ngIf="statut=='Administrateur' || statut=='Manager'">Ajouter</a>
                     <a class="dropdown-item" [routerLink]="['/enclos']">Lister</a>
                 </div>
             </li>
@@ -71,7 +57,7 @@
                     Zone
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" [routerLink]="['/ajoutZone']">Ajouter</a>
+                    <a class="dropdown-item" [routerLink]="['/ajoutZone']" *ngIf="statut=='Administrateur' || statut=='Manager'">Ajouter</a>
                     <a class="dropdown-item" [routerLink]="['/zone']">Lister</a>
                 </div>
             </li>
@@ -83,7 +69,7 @@
                     Planning
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" [routerLink]="['/planning']">Afficher le planning</a>
+                    <a class="dropdown-item" [routerLink]="['/planning']" *ngIf="statut=='Administrateur'|| statut=='Manager'">Afficher le planning</a>
                 </div>
             </li>
         </ul>
@@ -94,7 +80,7 @@
                     
                     <div class="media align-items-center">
                         <div class="media-body ml-2 d-none d-lg-block">
-                            <span>{{user.role.libelle}}</span>
+                            <span>{{staff.nom}} {{staff.prenom}}, ({{staff.role.libelle}})</span>
                         </div>
                     </div>
                 </a>
@@ -102,7 +88,7 @@
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">Bienvenue!</h6>
                     </div>
-                    <a [routerLink]="['/planning']" class="dropdown-item">
+                    <a [routerLink]="['/staff']" class="dropdown-item">
                         <i class="ni ni-calendar-grid-58"></i>
                         <span>Planning</span>
                     </a>

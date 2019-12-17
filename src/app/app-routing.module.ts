@@ -26,8 +26,9 @@ import { UpdateStaffComponent } from './update-staff/update-staff.component';
 import { AddTacheComponent } from './add-tache/add-tache.component';
 import { UpdateTacheComponent } from './update-tache/update-tache.component';
 import { ConnectionStaffComponent } from './connection-staff/connection-staff.component';
-import { PlanningComponent } from './planning/planning.component';
 import { AuthGuardService } from './Services/auth-guard.service';
+import { AgendaComponent } from './agenda/agenda.component';
+import { PlanningStaffComponent } from './planning-staff/planning-staff.component';
 
 
 const routes: Routes = [
@@ -167,8 +168,13 @@ const routes: Routes = [
   },
   {
     path: "planning",
-    component: PlanningComponent,
+    component: AgendaComponent,
     canActivate : [AuthGuardService]
+  },
+  {
+    path:"staff",
+    component:PlanningStaffComponent
+
   }
 
 

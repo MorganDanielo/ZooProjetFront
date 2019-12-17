@@ -3,6 +3,9 @@ import { Role } from '../Models/Role';
 import { RoleService } from '../Services/Role/role.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Staff } from '../Models/Staff';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { StatutService } from '../Services/statut.service';
 
 @Component({
   selector: 'app-role',
@@ -13,13 +16,21 @@ export class RoleComponent implements OnInit {
 
   listeRole:Role[];
   role:Role;
-
-  constructor(private roleService:RoleService, private router:Router, private route:ActivatedRoute) { }
+  staff:Staff=new Staff();
+  statut:string;
+  isEmploye=false;
+  constructor(private roleService:RoleService, private router:Router, private route:ActivatedRoute,private statutService:StatutService) { }
 
   ngOnInit() {
     this.roleService.getAllRole().subscribe(data=>{
       this.listeRole=data;
     });
+    this.statut=this.statutService.statut()
+    if (this.statut == "Employe") {
+      this.isEmploye = true;
+    } else {
+      this.isEmploye = false;
+    }
   }
 
   notif(idRole: number, index) {
