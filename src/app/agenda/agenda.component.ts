@@ -6,7 +6,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import * as moment from 'moment';
-import{frLocale} from '@fullcalendar/core/locales/fr';
+import allLocales from '@fullcalendar/core/locales-all';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { OptionsInput } from '@fullcalendar/core';
 
@@ -31,14 +31,14 @@ export class AgendaComponent implements OnInit {
   listeTaches: Tache[];
   events: any = [];  
   editable=true;
-  locale:frLocale;
   
 
 
 
   ngOnInit() {
     this.options={
-      locale:frLocale,
+      locales:allLocales,
+      locale:'fr',
     }
 
     this.loadEvents();

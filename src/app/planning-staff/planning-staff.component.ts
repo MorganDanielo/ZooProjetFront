@@ -8,7 +8,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import * as moment from 'moment';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { OptionsInput } from '@fullcalendar/core';
-import{frLocale} from '@fullcalendar/core/locales/fr';
+import allLocales from '@fullcalendar/core/locales-all';
 import { ActivatedRoute } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Staff } from '../Models/Staff';
@@ -18,6 +18,7 @@ import { Staff } from '../Models/Staff';
   templateUrl: './planning-staff.component.html',
   styleUrls: ['./planning-staff.component.css']
 })
+
 export class PlanningStaffComponent implements OnInit {
 
   tache: Tache = new Tache();
@@ -36,17 +37,13 @@ export class PlanningStaffComponent implements OnInit {
   listeTaches: Tache[];
   events: any = [];  
   editable=true;
-  locale:frLocale;
   
-
-
 
   ngOnInit() {
     this.options={
-      locale:frLocale,
+      locales:allLocales,
+      locale:'fr',
     }
-    
-    
     this.loadEvents();
   }
 

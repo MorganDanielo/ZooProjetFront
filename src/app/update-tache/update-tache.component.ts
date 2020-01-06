@@ -41,7 +41,6 @@ export class UpdateTacheComponent implements OnInit {
     , private statutService: StatutService) {
     this.tacheForm = this.formBuilder.group({
       intitule: ['', Validators.required],
-      date: ['', Validators.required],
       duree: ['', Validators.required],
       etat: ['', Validators.required],
       staff: ['', Validators.required]

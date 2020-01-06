@@ -1,5 +1,5 @@
 <div class="agenda">
-    <full-calendar locale="fr" defaultView="dayGridMonth" [plugins]="calendarPlugins" [events]="eventsModel" [header]="{
+    <full-calendar [locales]="options.locales" [locale]="options.locale" defaultView="dayGridMonth" [plugins]="calendarPlugins" [events]="eventsModel" [header]="{
         left: 'prev,next today',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'

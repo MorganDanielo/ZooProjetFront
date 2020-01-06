@@ -4,7 +4,6 @@ import { RoleService } from '../Services/Role/role.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Staff } from '../Models/Staff';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { StatutService } from '../Services/statut.service';
 
 @Component({
@@ -19,6 +18,7 @@ export class RoleComponent implements OnInit {
   staff:Staff=new Staff();
   statut:string;
   isEmploye=false;
+  isManager=false;
   constructor(private roleService:RoleService, private router:Router, private route:ActivatedRoute,private statutService:StatutService) { }
 
   ngOnInit() {
@@ -30,6 +30,11 @@ export class RoleComponent implements OnInit {
       this.isEmploye = true;
     } else {
       this.isEmploye = false;
+    }
+    if (this.statut == "Manager") {
+      this.isManager = true;
+    } else {
+      this.isManager = false;
     }
   }
 

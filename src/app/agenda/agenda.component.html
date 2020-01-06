@@ -1,6 +1,6 @@
 <div class="agenda">
   <full-calendar
-  locale="fr"
+  [locales]="options.locales" [locale]="options.locale" 
   defaultView="dayGridMonth"
   [plugins]="calendarPlugins"
   [events]="eventsModel" 
