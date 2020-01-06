@@ -55,7 +55,7 @@ import {DemoUtilsModule} from '../app/planning/formatfrançais/module';
 
 import localeFr from '@angular/common/locales/fr';  
 registerLocaleData(localeFr);
-import {FullCalendarModule} from '@fullcalendar/angular'
+import {FullCalendarModule} from '@fullcalendar/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

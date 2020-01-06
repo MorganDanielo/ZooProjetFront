@@ -11,7 +11,6 @@ import { OptionsInput } from '@fullcalendar/core';
 import{frLocale} from '@fullcalendar/core/locales/fr';
 import { ActivatedRoute } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { userInfo } from 'os';
 import { Staff } from '../Models/Staff';
 
 @Component({

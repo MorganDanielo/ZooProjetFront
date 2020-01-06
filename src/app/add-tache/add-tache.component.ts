@@ -16,31 +16,31 @@ import Swal from 'sweetalert2';
 })
 export class AddTacheComponent implements OnInit {
 
-  tache:Tache=new Tache();
-  listeStaff:Staff[];
-  listeEtat:Etat[];
-  tacheForm:FormGroup;
-  submitted=false;
+  tache: Tache = new Tache();
+  listeStaff: Staff[];
+  listeEtat: Etat[];
+  tacheForm: FormGroup;
+  submitted = false;
 
-  constructor(private tacheService:TacheService, private staffService:StaffService, private etatService:EtatService, private router:Router, private formBuilder:FormBuilder) { }
+  constructor(private tacheService: TacheService, private staffService: StaffService, private etatService: EtatService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.tacheForm=this.formBuilder.group({
-      intitule:['',Validators.required],
-      date:['',Validators.required],
-      duree:['',Validators.required],
-      etat:['',Validators.required],
-      staff:['',Validators.required]
+    this.tacheForm = this.formBuilder.group({
+      intitule: ['', Validators.required],
+      date: ['', Validators.required],
+      duree: ['', Validators.required],
+      etat: ['', Validators.required],
+      staff: ['', Validators.required]
     });
-    this.etatService.getAll().subscribe(data=>{
-      this.listeEtat=data;
+    this.etatService.getAll().subscribe(data => {
+      this.listeEtat = data;
     });
-    this.staffService.getAllStaff().subscribe(data=>{
-      this.listeStaff=data;
+    this.staffService.getAllStaff().subscribe(data => {
+      this.listeStaff = data;
     });
   }
 
-  get f() {return this.tacheForm.controls}
+  get f() { return this.tacheForm.controls }
 
   onSubmit() {
     this.submitted = true;

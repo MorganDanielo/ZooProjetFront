@@ -22,7 +22,7 @@
                                 <div class="erreur" *ngIf="f.intitule.errors.required">Entrer un intitulé</div>
                             </div>
 
-                            <div class="input-group input-group-alternative mb-3">
+                            <div class="input-group input-group-alternative mb-3" *ngIf="statut=='Administrateur' || statut=='Manager'">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-calendar-alt"></i>Planification de
                                         la
